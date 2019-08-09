@@ -1,0 +1,39 @@
+
+{
+
+  "generator.expansivebiomes": "Expansive Biomes",
+
+  "item.expansivebiomes.sawdust": "Sawdust",
+
+  "block.expansivebiomes.maple_log": "Maple Log",
+  "block.expansivebiomes.maple_planks": "Maple Planks",
+  "block.expansivebiomes.maple_leaves": "Maple Leaves",
+  "block.expansivebiomes.maple_sapling": "Maple Sapling",
+  "block.expansivebiomes.ash_log": "Ash Log",
+  "block.expansivebiomes.ash_planks": "Ash Planks",
+  "block.expansivebiomes.ash_leaves": "Ash Leaves",
+
+  "block.expansivebiomes.ginkgo_log": "Ginkgo Log",
+  "block.expansivebiomes.ginkgo_planks": "Ginkgo Planks",
+  "block.expansivebiomes.ginkgo_leaves": "Ginkgo Leaves",
+
+  "block.expansivebiomes.teak_log": "Teak Log",
+  "block.expansivebiomes.teak_planks": "Teak Planks",
+  "block.expansivebiomes.teak_leaves": "Teak Leaves",
+
+  "block.expansivebiomes.mahogany_log": "Mahogany Log",
+  "block.expansivebiomes.mahogany_planks": "Mahogany Planks",
+  "block.expansivebiomes.mahogany_leaves": "Mahogany Leaves",
+
+  "block.expansivebiomes.beech_log": "Beech Log",
+  "block.expansivebiomes.beech_planks": "Beech Planks",
+  "block.expansivebiomes.beech_leaves": "Beech Leaves",
+
+  "block.expansivebiomes.elm_log": "Elm Log",
+  "block.expansivebiomes.elm_planks": "Elm Planks",
+  "block.expansivebiomes.elm_leaves": "Elm Leaves",
+  "itemGroup.expansivebiomes": "Expansive Biomes",
+
+  "biome.expansivebiomes.hardwoodforest" : "Hardwood Forest",
+  "biome.expansivebiomes.shield" : "Shield"
+}

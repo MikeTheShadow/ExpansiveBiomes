@@ -1,0 +1,8 @@
+modLoader="javafml" #mandatory
+loaderVersion="[25,)" #mandatory
+credits="Biome mod by MikeTheShadow and Eelt. Powered by Forge (credits to forge team for forge)." #optional
+[[mods]] #mandatory
+modId="expansivebiomes" #mandatory
+version="0.0.0.2g" #mandatory
+displayName="Expansive Biomes" #mandatory
+description='''Expansive Biomes adds more biomes to Minecraft 1.14.2. By: MikeTheShadow, and Eelt.'''

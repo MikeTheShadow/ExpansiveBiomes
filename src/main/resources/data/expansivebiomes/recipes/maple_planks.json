@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"C  ",
+		"   ",
+		"   "
+	],
+	"key": {
+		"C": {
+			"item": "expansivebiomes:maple_log"
+		}
+	},
+	"result": {
+		"item": "expansivebiomes:maple_planks"
+		,"count" : 4
+	}
+}
