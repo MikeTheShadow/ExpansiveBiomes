@@ -20,7 +20,7 @@ public class ShallowFrozenOceanBiome extends Biome {
     protected static final PerlinNoiseGenerator iceNoise = new PerlinNoiseGenerator(new Random(3456L), 3);
     public static final ShallowFrozenOceanBiome BIOME = new ShallowFrozenOceanBiome();
     public ShallowFrozenOceanBiome() {
-        super((new Biome.Builder()).func_222351_a(SurfaceBuilder.field_215405_P, SurfaceBuilder.field_215425_v).precipitation(Biome.RainType.SNOW).category(Biome.Category.OCEAN).depth(-0.3F).scale(0.03F).temperature(0.0F).downfall(0.5F).waterColor(3750089).waterFogColor(329011).parent((String)null));
+        super((new Builder()).surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_DIRT_SAND_CONFIG).precipitation(Biome.RainType.SNOW).category(Biome.Category.OCEAN).depth(-0.3F).scale(0.03F).temperature(0.0F).downfall(0.5F).waterColor(3750089).waterFogColor(329011).parent((String)null));
         this.addStructure(Feature.OCEAN_RUIN, new OceanRuinConfig(OceanRuinStructure.Type.COLD, 0.3F, 0.9F));
         this.addStructure(Feature.MINESHAFT, new MineshaftConfig(0.004D, net.minecraft.world.gen.feature.structure.MineshaftStructure.Type.NORMAL));
         this.addStructure(Feature.SHIPWRECK, new ShipwreckConfig(false));
@@ -57,7 +57,7 @@ public class ShallowFrozenOceanBiome extends Biome {
 
     public float getTemperature(BlockPos p_180626_1_) {
         float lvt_2_1_ = this.getDefaultTemperature();
-        double lvt_3_1_ = field_205163_aV.getValue((double)p_180626_1_.getX() * 0.05D, (double)p_180626_1_.getZ() * 0.05D);
+        double lvt_3_1_ = iceNoise.getValue((double)p_180626_1_.getX() * 0.05D, (double)p_180626_1_.getZ() * 0.05D);
         double lvt_5_1_ = INFO_NOISE.getValue((double)p_180626_1_.getX() * 0.2D, (double)p_180626_1_.getZ() * 0.2D);
         double lvt_7_1_ = lvt_3_1_ + lvt_5_1_;
         if (lvt_7_1_ < 0.3D) {
@@ -75,3 +75,4 @@ public class ShallowFrozenOceanBiome extends Biome {
         }
     }
 }
+

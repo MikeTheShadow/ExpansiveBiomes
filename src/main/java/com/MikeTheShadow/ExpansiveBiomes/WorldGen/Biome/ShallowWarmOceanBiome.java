@@ -23,7 +23,7 @@ public class ShallowWarmOceanBiome extends Biome {
     public static final ShallowWarmOceanBiome BIOME = new ShallowWarmOceanBiome();
 
     public ShallowWarmOceanBiome() {
-        super((new Biome.Builder()).func_222351_a(SurfaceBuilder.field_215396_G, SurfaceBuilder.field_215391_B).precipitation(Biome.RainType.RAIN).category(Biome.Category.OCEAN).depth(-0.3F).scale(0.03F).temperature(0.5F).downfall(0.5F).waterColor(4445678).waterFogColor(270131).parent((String) null));
+        super((new Builder()).surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.SAND_CONFIG).precipitation(RainType.RAIN).category(Category.OCEAN).depth(-0.3F).scale(0.03F).temperature(0.5F).downfall(0.5F).waterColor(4445678).waterFogColor(270131).parent((String)null));
         this.addStructure(Feature.OCEAN_RUIN, new OceanRuinConfig(OceanRuinStructure.Type.WARM, 0.3F, 0.9F));
         this.addStructure(Feature.MINESHAFT, new MineshaftConfig(0.004D, net.minecraft.world.gen.feature.structure.MineshaftStructure.Type.NORMAL));
         this.addStructure(Feature.SHIPWRECK, new ShipwreckConfig(false));

@@ -19,7 +19,7 @@ import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 public class ShallowColdOceanBiome extends Biome {
     public static final ShallowColdOceanBiome BIOME = new ShallowColdOceanBiome();
     public ShallowColdOceanBiome() {
-        super((new Biome.Builder()).func_222351_a(SurfaceBuilder.field_215396_G, SurfaceBuilder.field_215425_v).precipitation(Biome.RainType.RAIN).category(Biome.Category.OCEAN).depth(-0.3F).scale(0.03F).temperature(0.5F).downfall(0.5F).waterColor(4020182).waterFogColor(329011).parent((String)null));
+        super((new Builder()).surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_DIRT_SAND_CONFIG).precipitation(Biome.RainType.RAIN).category(Biome.Category.OCEAN).depth(-0.3F).scale(0.03F).temperature(0.5F).downfall(0.5F).waterColor(4020182).waterFogColor(329011).parent((String)null));
         this.addStructure(Feature.MINESHAFT, new MineshaftConfig(0.004D, MineshaftStructure.Type.NORMAL));
         this.addStructure(Feature.OCEAN_RUIN, new OceanRuinConfig(net.minecraft.world.gen.feature.structure.OceanRuinStructure.Type.COLD, 0.3F, 0.9F));
         this.addStructure(Feature.SHIPWRECK, new ShipwreckConfig(false));
