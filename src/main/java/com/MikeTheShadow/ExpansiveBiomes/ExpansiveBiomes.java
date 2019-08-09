@@ -7,12 +7,9 @@ import com.MikeTheShadow.ExpansiveBiomes.CustomBlocks.CustomSaplingBlock;
 import com.MikeTheShadow.ExpansiveBiomes.Tree.BeechTree;
 import com.MikeTheShadow.ExpansiveBiomes.Tree.MapleTree;
 import com.MikeTheShadow.ExpansiveBiomes.Utils.ExpansiveItemGroup;
-<<<<<<< HEAD
 import com.MikeTheShadow.ExpansiveBiomes.WorldGen.Biome.HardwoodforestBiome;
 import com.MikeTheShadow.ExpansiveBiomes.WorldGen.Biome.ShieldBiome;
-=======
 import com.MikeTheShadow.ExpansiveBiomes.WorldGen.Biome.*;
->>>>>>> 9a48849ee852540e0545f4b815bdac0b264a5e1a
 import com.MikeTheShadow.ExpansiveBiomes.WorldGen.ExpansiveWorldType;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

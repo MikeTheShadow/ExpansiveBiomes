@@ -20,13 +20,13 @@ public class MapleTree extends Tree
     }
     protected AbstractTreeFeature<NoFeatureConfig> getTreeFeature(Random p_196936_1_)
     {
-        return (AbstractTreeFeature)(p_196936_1_.nextInt(10) == 0 ? new MapleTreeFeature(NoFeatureConfig::func_214639_a, false,false) : new MapleTreeFeature(NoFeatureConfig::func_214639_a, false,false));
+        return (AbstractTreeFeature)(p_196936_1_.nextInt(10) == 0 ? new MapleTreeFeature(NoFeatureConfig::deserialize, false,false) : new MapleTreeFeature(NoFeatureConfig::deserialize, false,false));
     }
     @Override
     public boolean spawn(IWorld p_196935_1_, BlockPos p_196935_2_, BlockState p_196935_3_, Random p_196935_4_)
     {
         //AbstractTreeFeature<NoFeatureConfig> lvt_5_1_ = this.getTreeFeature(p_196935_4_);
-        MapleTreeFeature lvt_5_1_ = new MapleTreeFeature(NoFeatureConfig::func_214639_a, false,false);
+        MapleTreeFeature lvt_5_1_ = new MapleTreeFeature(NoFeatureConfig::deserialize, false,false);
         if (lvt_5_1_ == null) {
             return false;
         } else {
