@@ -1,3 +1,7 @@
+# 0.0.0.3
+* Port to 1.14.4
+* Various changes
+
 # 0.0.0.2g
 * Fixed a comment in the Shallow Frozen Ocean class causing "errors" in some IDEs.
 * Fixed a bug in ExpansiveWorldType that caused all dimensions to generate chunks according to the Expansive Biomes chunk generator. (closes #1)
