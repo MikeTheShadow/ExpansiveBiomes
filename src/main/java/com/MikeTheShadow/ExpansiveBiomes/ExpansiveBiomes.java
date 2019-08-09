@@ -25,6 +25,7 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import java.util.ArrayList;
@@ -37,7 +38,6 @@ import java.util.logging.Logger;
 public class ExpansiveBiomes
 {
     public static final String MODID = "expansivebiomes";
-
     //BLOCKLISTS
     private static List<Block> blockListPlank = new ArrayList<>();
     public static List<Block> blockListLog = new ArrayList<>();
@@ -57,7 +57,9 @@ public class ExpansiveBiomes
     public static WorldType ExpansiveWorldType = new ExpansiveWorldType();
     public static final ItemGroup expansiveItemGroup = new ExpansiveItemGroup();
 
-    public static void registerItems(RegistryEvent.Register<Item> event)
+
+    @SubscribeEvent
+    public static void registerItems(final RegistryEvent.Register<Item> event)
     {
         itemlist.add(new Item(new Item.Properties().maxStackSize(64).group(expansiveItemGroup)).setRegistryName(ExpansiveBiomes.MODID, "sawdust"));
         for(int saplingID = 0; saplingID < blockListSapling.size();saplingID++)
@@ -72,12 +74,13 @@ public class ExpansiveBiomes
         }
         for(int itemCount = 0; itemCount < itemlist.size(); itemCount++)
         {
-            //event.getRegistry().register(itemlist.get(itemCount));
+            event.getRegistry().register(itemlist.get(itemCount));
         }
 
     }
 
-    public static void registerBlocks(RegistryEvent.Register<Block> event)
+    @SubscribeEvent
+    public static void registerBlocks(final RegistryEvent.Register<Block> event)
     {
         //DO NOT CHANGE THE ORDER OF THIS UNLESS GIVEN EXPRESS PERMISSION
         woodTypes.add("maple");
@@ -97,20 +100,20 @@ public class ExpansiveBiomes
         blockListSapling.add(new CustomSaplingBlock(new MapleTree(), Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().sound(SoundType.PLANT).hardnessAndResistance(0f,0f)).setRegistryName(woodTypes.get(0) +"_sapling"));
         blockListSapling.add(new CustomSaplingBlock(new MapleTree(), Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().sound(SoundType.PLANT).hardnessAndResistance(0f,0f)).setRegistryName(woodTypes.get(1) +"_sapling"));
         blockListSapling.add(new CustomSaplingBlock(new BeechTree(), Block.Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().sound(SoundType.PLANT).hardnessAndResistance(0f,0f)).setRegistryName(woodTypes.get(2) +"_sapling"));
-        //event.getRegistry().register(blockListSapling.get(0));
+        event.getRegistry().register(blockListSapling.get(0));
         for(int blockCount = 0; blockCount < blockListLog.size();blockCount++)
         {
-            //event.getRegistry().register(blockListLog.get(blockCount));
-            //event.getRegistry().register(blockListLeaves.get(blockCount));
-            //event.getRegistry().register(blockListPlank.get(blockCount));
+            event.getRegistry().register(blockListLog.get(blockCount));
+            event.getRegistry().register(blockListLeaves.get(blockCount));
+            event.getRegistry().register(blockListPlank.get(blockCount));
         }
         for(int saplingCount = 0; saplingCount < blockListSapling.size();saplingCount++)
         {
-            //event.getRegistry().register(blockListSapling.get(saplingCount));
+            event.getRegistry().register(blockListSapling.get(saplingCount));
         }
     }
-
-    public static void registerBiome(RegistryEvent.Register<Biome> event)
+    @SubscribeEvent
+    public static void registerBiome(final RegistryEvent.Register<Biome> event)
     {
         Biome hardwoodBiome = HardwoodforestBiome.BIOME;
         Biome shieldBiome = ShieldBiome.BIOME;
