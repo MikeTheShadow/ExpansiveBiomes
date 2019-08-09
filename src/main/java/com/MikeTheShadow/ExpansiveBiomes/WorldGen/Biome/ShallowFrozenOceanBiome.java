@@ -22,60 +22,56 @@ public class ShallowFrozenOceanBiome extends Biome {
     public ShallowFrozenOceanBiome() {
         super((new Biome.Builder()).func_222351_a(SurfaceBuilder.field_215405_P, SurfaceBuilder.field_215425_v).precipitation(Biome.RainType.SNOW).category(Biome.Category.OCEAN).depth(-0.3F).scale(0.03F).temperature(0.0F).downfall(0.5F).waterColor(3750089).waterFogColor(329011).parent((String)null));
         this.addStructure(Feature.OCEAN_RUIN, new OceanRuinConfig(OceanRuinStructure.Type.COLD, 0.3F, 0.9F));
-        this.addStructure(Feature.MINESHAFT, new MineshaftConfig(0.004D, MineshaftStructure.Type.NORMAL));
+        this.addStructure(Feature.MINESHAFT, new MineshaftConfig(0.004D, net.minecraft.world.gen.feature.structure.MineshaftStructure.Type.NORMAL));
         this.addStructure(Feature.SHIPWRECK, new ShipwreckConfig(false));
-        DefaultBiomeFeatures.func_222346_b(this);
-        DefaultBiomeFeatures.func_222295_c(this);
-        DefaultBiomeFeatures.func_222333_d(this);
-        DefaultBiomeFeatures.func_222305_an(this);
-        DefaultBiomeFeatures.func_222335_f(this);
-        DefaultBiomeFeatures.func_222332_ao(this);
-        DefaultBiomeFeatures.func_222326_g(this);
-        DefaultBiomeFeatures.func_222288_h(this);
-        DefaultBiomeFeatures.func_222282_l(this);
+        DefaultBiomeFeatures.addOceanCarvers(this);
+        DefaultBiomeFeatures.addStructures(this);
+        DefaultBiomeFeatures.addLakes(this);
+        DefaultBiomeFeatures.addIcebergs(this);
+        DefaultBiomeFeatures.addMonsterRooms(this);
+        DefaultBiomeFeatures.addBlueIce(this);
+        DefaultBiomeFeatures.addStoneVariants(this);
+        DefaultBiomeFeatures.addOres(this);
+        DefaultBiomeFeatures.addSedimentDisks(this);
         DefaultBiomeFeatures.func_222296_u(this);
-        DefaultBiomeFeatures.func_222342_U(this);
+        DefaultBiomeFeatures.addDefaultFlowers(this);
         DefaultBiomeFeatures.func_222348_W(this);
-        DefaultBiomeFeatures.func_222315_Z(this);
-        DefaultBiomeFeatures.func_222311_aa(this);
-        DefaultBiomeFeatures.func_222337_am(this);
-        DefaultBiomeFeatures.func_222297_ap(this);
-        this.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(EntityType.SQUID, 1, 1, 4));
-        this.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(EntityType.SALMON, 15, 1, 5));
-        this.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.POLAR_BEAR, 1, 1, 2));
-        this.addSpawn(EntityClassification.AMBIENT, new Biome.SpawnListEntry(EntityType.BAT, 10, 8, 8));
-        this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.SPIDER, 100, 4, 4));
-        this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.ZOMBIE, 95, 4, 4));
-        this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.DROWNED, 5, 1, 1));
-        this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.ZOMBIE_VILLAGER, 5, 1, 1));
-        this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.SKELETON, 100, 4, 4));
-        this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.CREEPER, 100, 4, 4));
-        this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.SLIME, 100, 4, 4));
-        this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.ENDERMAN, 10, 1, 4));
-        this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.WITCH, 5, 1, 1));
+        DefaultBiomeFeatures.addMushrooms(this);
+        DefaultBiomeFeatures.addReedsAndPumpkins(this);
+        DefaultBiomeFeatures.addSprings(this);
+        DefaultBiomeFeatures.addFreezeTopLayer(this);
+        this.addSpawn(EntityClassification.WATER_CREATURE, new SpawnListEntry(EntityType.SQUID, 1, 1, 4));
+        this.addSpawn(EntityClassification.WATER_CREATURE, new SpawnListEntry(EntityType.SALMON, 15, 1, 5));
+        this.addSpawn(EntityClassification.CREATURE, new SpawnListEntry(EntityType.POLAR_BEAR, 1, 1, 2));
+        this.addSpawn(EntityClassification.AMBIENT, new SpawnListEntry(EntityType.BAT, 10, 8, 8));
+        this.addSpawn(EntityClassification.MONSTER, new SpawnListEntry(EntityType.SPIDER, 100, 4, 4));
+        this.addSpawn(EntityClassification.MONSTER, new SpawnListEntry(EntityType.ZOMBIE, 95, 4, 4));
+        this.addSpawn(EntityClassification.MONSTER, new SpawnListEntry(EntityType.DROWNED, 5, 1, 1));
+        this.addSpawn(EntityClassification.MONSTER, new SpawnListEntry(EntityType.ZOMBIE_VILLAGER, 5, 1, 1));
+        this.addSpawn(EntityClassification.MONSTER, new SpawnListEntry(EntityType.SKELETON, 100, 4, 4));
+        this.addSpawn(EntityClassification.MONSTER, new SpawnListEntry(EntityType.CREEPER, 100, 4, 4));
+        this.addSpawn(EntityClassification.MONSTER, new SpawnListEntry(EntityType.SLIME, 100, 4, 4));
+        this.addSpawn(EntityClassification.MONSTER, new SpawnListEntry(EntityType.ENDERMAN, 10, 1, 4));
+        this.addSpawn(EntityClassification.MONSTER, new SpawnListEntry(EntityType.WITCH, 5, 1, 1));
     }
 
-    /**
-     * Gets the current temperature at the given location, based off of the default for this biome, the elevation of the
-     * position, and some random perlin noise.
-     */
-    public float getTemperature(BlockPos pos) {
-        float f = this.getDefaultTemperature();
-        double d0 = iceNoise.getValue((double)pos.getX() * 0.05D, (double)pos.getZ() * 0.05D);
-        double d1 = field_180281_af.getValue((double)pos.getX() * 0.2D, (double)pos.getZ() * 0.2D);
-        double d2 = d0 + d1;
-        if (d2 < 0.3D) {
-            double d3 = field_180281_af.getValue((double)pos.getX() * 0.09D, (double)pos.getZ() * 0.09D);
-            if (d3 < 0.8D) {
-                f = 0.2F;
+    public float getTemperature(BlockPos p_180626_1_) {
+        float lvt_2_1_ = this.getDefaultTemperature();
+        double lvt_3_1_ = field_205163_aV.getValue((double)p_180626_1_.getX() * 0.05D, (double)p_180626_1_.getZ() * 0.05D);
+        double lvt_5_1_ = INFO_NOISE.getValue((double)p_180626_1_.getX() * 0.2D, (double)p_180626_1_.getZ() * 0.2D);
+        double lvt_7_1_ = lvt_3_1_ + lvt_5_1_;
+        if (lvt_7_1_ < 0.3D) {
+            double lvt_9_1_ = INFO_NOISE.getValue((double)p_180626_1_.getX() * 0.09D, (double)p_180626_1_.getZ() * 0.09D);
+            if (lvt_9_1_ < 0.8D) {
+                lvt_2_1_ = 0.2F;
             }
         }
 
-        if (pos.getY() > 64) {
-            float f1 = (float)(field_150605_ac.getValue((double)((float)pos.getX() / 8.0F), (double)((float)pos.getZ() / 8.0F)) * 4.0D);
-            return f - (f1 + (float)pos.getY() - 64.0F) * 0.05F / 30.0F;
+        if (p_180626_1_.getY() > 64) {
+            float lvt_9_2_ = (float)(TEMPERATURE_NOISE.getValue((double)((float)p_180626_1_.getX() / 8.0F), (double)((float)p_180626_1_.getZ() / 8.0F)) * 4.0D);
+            return lvt_2_1_ - (lvt_9_2_ + (float)p_180626_1_.getY() - 64.0F) * 0.05F / 30.0F;
         } else {
-            return f;
+            return lvt_2_1_;
         }
     }
 }
