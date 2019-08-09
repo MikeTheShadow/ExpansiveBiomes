@@ -26,8 +26,10 @@ public abstract class ExpansiveSurfaceBuilder<C extends ISurfaceBuilderConfig> e
     public static final BlockState NETHERRACK = Blocks.NETHERRACK.getDefaultState();
     public static final BlockState END_STONE = Blocks.END_STONE.getDefaultState();
     public static final BlockState CLAY = Blocks.CLAY.getDefaultState();
+    //Create a config of what you want the surface to be comprimsed of it goes BlockState topMaterial, BlockState underMaterial, BlockState underWaterMaterial
     public static final SurfaceBuilderConfig shieldConfig = new SurfaceBuilderConfig(STONE, GRAVEL, CLAY);
 
+    //You need to register the blocks here as a Config
     public static final SurfaceBuilder<SurfaceBuilderConfig> shieldBuilderConfig = register("shield_biome", new DefaultSurfaceBuilder(SurfaceBuilderConfig::deserialize));
 
     private static <C extends ISurfaceBuilderConfig, F extends SurfaceBuilder<C>> F register(String key, F builderIn) {
