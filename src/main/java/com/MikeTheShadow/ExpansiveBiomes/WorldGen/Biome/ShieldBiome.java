@@ -19,7 +19,7 @@ public class ShieldBiome extends Biome
 {
     public static final ShieldBiome BIOME = new ShieldBiome();
     public ShieldBiome() {
-        super((new Biome.Builder()).func_222351_a(SurfaceBuilder.field_215396_G, ExpansiveSurfaceBuilder.shieldConfig).precipitation(RainType.SNOW).category(Category.TAIGA).depth(0.125F).scale(0.05F).temperature(2.0F).downfall(0.8F).waterColor(4159204).waterFogColor(329011).parent((String)null));
+        super((new Biome.Builder()).func_222351_a(SurfaceBuilder.GRASS_BLOCK, ExpansiveSurfaceBuilder.shieldConfig).precipitation(RainType.SNOW).category(Category.TAIGA).depth(0.125F).scale(0.05F).temperature(2.0F).downfall(0.8F).waterColor(4159204).waterFogColor(329011).parent((String)null));
         this.addStructure(Feature.field_214550_p, new VillageConfig("village/taiga/town_centers", 6));
         this.addStructure(Feature.field_214536_b, new PillagerOutpostConfig(0.004D));
         this.addStructure(Feature.MINESHAFT, new MineshaftConfig(0.004D, MineshaftStructure.Type.NORMAL));
