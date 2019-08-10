@@ -2,11 +2,11 @@
   "replace": false,
   "values": [
     "#expansivebiomes:ash_log",
-    "#biomesoplenty:beech_log",
-    "#biomesoplenty:elm_log",
-    "#biomesoplenty:ginkgo_log",
-    "#biomesoplenty:mahogany_log",
-    "#biomesoplenty:maple_log",
-    "#biomesoplenty:teak_log"
+    "#expansivebiomes:beech_log",
+    "#expansivebiomes:elm_log",
+    "#expansivebiomes:ginkgo_log",
+    "#expansivebiomes:mahogany_log",
+    "#expansivebiomes:maple_log",
+    "#expansivebiomes:teak_log"
   ]
 }

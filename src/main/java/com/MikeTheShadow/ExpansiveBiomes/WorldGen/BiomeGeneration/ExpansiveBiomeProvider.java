@@ -2,156 +2,76 @@
 package com.MikeTheShadow.ExpansiveBiomes.WorldGen.BiomeGeneration;
 
 import com.MikeTheShadow.ExpansiveBiomes.ExpansiveBiomes;
+import com.MikeTheShadow.ExpansiveBiomes.WorldGen.Biome.*;
+import com.google.common.collect.Sets;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.provider.BiomeProvider;
+import net.minecraft.world.biome.provider.OverworldBiomeProviderSettings;
 import net.minecraft.world.gen.*;
 import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.gen.layer.Layer;
+import net.minecraft.world.gen.layer.LayerUtil;
+import net.minecraft.world.storage.WorldInfo;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-import static java.lang.Math.abs;
-import static java.lang.Math.sqrt;
-
 public class ExpansiveBiomeProvider extends BiomeProvider
 {
-    private final double TEMPERATURE_SCALE = 700;
-    private final double DEPTH_SCALE = 100;
+    private final Layer genBiomes;
+    private final Layer biomeFactoryLayer;
+    private final Biome[] biomes;
 
-    private final double NOISE_SCALE = 700;
-    private final double NOISE_VALUE = 0.25;
-    private enum Temperature {
-        FROZEN,
-        COLD,
-        NORMAL,
-        LUKEWARM,
-        WARM,
-    }
-    private final PerlinNoiseGenerator noise;
-    private final SimplexNoiseGenerator noiseTemp;
+    private static final Logger LOGGER = LogManager.getLogger();
 
-    public ExpansiveBiomeProvider(long seed)
-    {
-        boolean seedNeg = false;
-        if (seed<0){
-            seedNeg = true;
-        }
-        noise = new PerlinNoiseGenerator(new Random(seed),5);
-        if (seedNeg == true){
-            noiseTemp = new SimplexNoiseGenerator(new Random((long)-(sqrt(abs(seed/2)))));
-        } else {
-            noiseTemp = new SimplexNoiseGenerator(new Random((long)sqrt(seed/2)));
-        }
+    public ExpansiveBiomeProvider(OverworldBiomeProviderSettings settingsProvider) {
+        this.biomes = new Biome[]{Biomes.OCEAN, Biomes.PLAINS, Biomes.DESERT, Biomes.MOUNTAINS, Biomes.FOREST, Biomes.TAIGA, Biomes.SWAMP, Biomes.RIVER, Biomes.FROZEN_OCEAN, Biomes.FROZEN_RIVER, Biomes.SNOWY_TUNDRA, Biomes.SNOWY_MOUNTAINS, Biomes.MUSHROOM_FIELDS, Biomes.MUSHROOM_FIELD_SHORE, Biomes.BEACH, Biomes.DESERT_HILLS, Biomes.WOODED_HILLS, Biomes.TAIGA_HILLS, Biomes.MOUNTAIN_EDGE, Biomes.JUNGLE, Biomes.JUNGLE_HILLS, Biomes.JUNGLE_EDGE, Biomes.DEEP_OCEAN, Biomes.STONE_SHORE, Biomes.SNOWY_BEACH, Biomes.BIRCH_FOREST, Biomes.BIRCH_FOREST_HILLS, Biomes.DARK_FOREST, Biomes.SNOWY_TAIGA, Biomes.SNOWY_TAIGA_HILLS, Biomes.GIANT_TREE_TAIGA, Biomes.GIANT_TREE_TAIGA_HILLS, Biomes.WOODED_MOUNTAINS, Biomes.SAVANNA, Biomes.SAVANNA_PLATEAU, Biomes.BADLANDS, Biomes.WOODED_BADLANDS_PLATEAU, Biomes.BADLANDS_PLATEAU, Biomes.WARM_OCEAN, Biomes.LUKEWARM_OCEAN, Biomes.COLD_OCEAN, Biomes.DEEP_WARM_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN, Biomes.DEEP_COLD_OCEAN, Biomes.DEEP_FROZEN_OCEAN, Biomes.SUNFLOWER_PLAINS, Biomes.DESERT_LAKES, Biomes.GRAVELLY_MOUNTAINS, Biomes.FLOWER_FOREST, Biomes.TAIGA_MOUNTAINS, Biomes.SWAMP_HILLS, Biomes.ICE_SPIKES, Biomes.MODIFIED_JUNGLE, Biomes.MODIFIED_JUNGLE_EDGE, Biomes.TALL_BIRCH_FOREST, Biomes.TALL_BIRCH_HILLS, Biomes.DARK_FOREST_HILLS, Biomes.SNOWY_TAIGA_MOUNTAINS, Biomes.GIANT_SPRUCE_TAIGA, Biomes.GIANT_SPRUCE_TAIGA_HILLS, Biomes.MODIFIED_GRAVELLY_MOUNTAINS, Biomes.SHATTERED_SAVANNA, Biomes.SHATTERED_SAVANNA_PLATEAU, Biomes.ERODED_BADLANDS, Biomes.MODIFIED_WOODED_BADLANDS_PLATEAU, Biomes.MODIFIED_BADLANDS_PLATEAU};
+        WorldInfo worldinfo = settingsProvider.getWorldInfo();
+        OverworldGenSettings overworldgensettings = settingsProvider.getGeneratorSettings();
+        Layer[] alayer = LayerUtil.buildOverworldProcedure(worldinfo.getSeed(), worldinfo.getGenerator(), overworldgensettings);
+        this.genBiomes = alayer[0];
+        this.biomeFactoryLayer = alayer[1];
     }
     @Override
     public Biome getBiome(int x, int y)
     {
-        double deepOceanDepth = 0.0000000005;
-        double shallowOceanMin = 0.70; //Minimum d-value for shallow ocean generation.
-        double t = abs(noiseTemp.getValue((double) x /TEMPERATURE_SCALE, (double) y/TEMPERATURE_SCALE ));
-        double d = (1.0 + noise.getValue((double) x / DEPTH_SCALE, (double) y / DEPTH_SCALE))*0.4;
-        double rand = abs(noiseTemp.getValue((double) x / NOISE_SCALE, (double) y / NOISE_SCALE)); //Rand for TEMPERATURE, Makes "Splotches"
-        rand = 1.0 + (rand * NOISE_VALUE);
-        Temperature temp;
-        if ((t * rand) < 0.3) {
-            temp = Temperature.FROZEN;
-        } else if ((t * rand) < 0.4) {
-            temp = Temperature.COLD;
-        } else if ((t * rand) < 0.5) {
-            temp = Temperature.NORMAL;
-        } else if ((t * rand) < 0.65) {
-            temp = Temperature.LUKEWARM;
-        } else {
-            temp = Temperature.WARM;
-        }
-        if (d < 0.852) //Ocean
-        {
-            switch (temp) {
-                case WARM:
-                    if (d < deepOceanDepth) {
-                        return Biomes.DEEP_WARM_OCEAN;
-                    } else if (d > shallowOceanMin) {
-                        return ExpansiveBiomes.biomeListShallow.get(0);
-                    } else {
-                        return Biomes.WARM_OCEAN;
-                    }
-                case LUKEWARM:
-                    if (d < deepOceanDepth) {
-                        return Biomes.DEEP_LUKEWARM_OCEAN;
-                    } else if (d > shallowOceanMin) {
-                        return ExpansiveBiomes.biomeListShallow.get(1);
-                    } else {
-                        return Biomes.LUKEWARM_OCEAN;
-                    }
-                case NORMAL:
-                    if (d < deepOceanDepth) {
-                        return Biomes.DEEP_OCEAN;
-                    } else if (d > shallowOceanMin) {
-                        return ExpansiveBiomes.biomeListShallow.get(2);
-                    } else {
-                        return Biomes.OCEAN;
-                    }
-                case COLD:
-                    if (d < deepOceanDepth) {
-                        return Biomes.DEEP_COLD_OCEAN;
-                    } else if (d > shallowOceanMin) {
-                        return ExpansiveBiomes.biomeListShallow.get(3);
-                    } else {
-                        return Biomes.COLD_OCEAN;
-                    }
-                case FROZEN:
-                    if (d < deepOceanDepth) {
-                        return Biomes.DEEP_FROZEN_OCEAN;
-                    } else if (d > shallowOceanMin) {
-                        return ExpansiveBiomes.biomeListShallow.get(4);
-                    } else {
-                        return Biomes.FROZEN_OCEAN;
-                    }
-            }
-        }
-        else { //Not Ocean, aka land
-            switch(temp)
-            {
-                case WARM:
-                    return ExpansiveBiomes.biomeListWarm.get(0);
-                case LUKEWARM:
-                    return ExpansiveBiomes.biomeListLukeWarm.get(0);
-                case NORMAL:
-                    return ExpansiveBiomes.biomeListNormal.get(0);
-                case COLD:
-                    return ExpansiveBiomes.biomeListCold.get(0);
-                case FROZEN:
-                    return ExpansiveBiomes.biomeListFrozen.get(0);
-            }
-        }
-        return ExpansiveBiomes.biomeListCold.get(1);
+        return this.biomeFactoryLayer.func_215738_a(x, y);
     }
-    private final Biome[] allBiomes = new Biome[]{ //To depricate when structures are reworked
-            Biomes.OCEAN, Biomes.FROZEN_OCEAN, Biomes.BEACH, Biomes.DEEP_OCEAN, Biomes.SNOWY_BEACH, Biomes.WARM_OCEAN,
-            Biomes.LUKEWARM_OCEAN, Biomes.COLD_OCEAN, Biomes.DEEP_WARM_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN,
-            Biomes.DEEP_COLD_OCEAN, Biomes.DEEP_FROZEN_OCEAN
-    };
+
+    @Override
+    public Biome func_222366_b(int p_222366_1_, int p_222366_2_)
+    {
+        return this.genBiomes.func_215738_a(p_222366_1_, p_222366_2_);
+    }
+
     @Override
     public Biome[] getBiomes(int x, int z, int width, int length, boolean cacheFlag) {
-        Biome[] biomes = new Biome[width * length];
-        for (int dx = 0; dx < width; dx++) {
-            for (int dy = 0; dy < length; dy++) {
-                biomes[dy * width + dx] = getBiome(x + dx, z+dy);
-            }
-        }
-        return biomes;
-    }
-
-    public Set<Biome> getBiomesInSquare(int i, int i1, int i2)
-    {
-        return null;
+        return this.biomeFactoryLayer.generateBiomes(x, z, width, length);
     }
 
     @Override
+    public Set<Biome> getBiomesInSquare(int centerX, int centerZ, int sideLength) {
+        int i = centerX - sideLength >> 2;
+        int j = centerZ - sideLength >> 2;
+        int k = centerX + sideLength >> 2;
+        int l = centerZ + sideLength >> 2;
+        int i1 = k - i + 1;
+        int j1 = l - j + 1;
+        Set<Biome> set = Sets.newHashSet();
+        Collections.addAll(set, this.genBiomes.generateBiomes(i, j, i1, j1));
+        return set;
+    }
+
+    @Override
+    @Nullable
     public BlockPos findBiomePosition(int x, int z, int range, List<Biome> biomes, Random random) {
         int i = x - range >> 2;
         int j = z - range >> 2;
@@ -159,7 +79,7 @@ public class ExpansiveBiomeProvider extends BiomeProvider
         int l = z + range >> 2;
         int i1 = k - i + 1;
         int j1 = l - j + 1;
-        Biome[] abiome = getBiomes(i, j, i1, j1, true);
+        Biome[] abiome = this.genBiomes.generateBiomes(i, j, i1, j1);
         BlockPos blockpos = null;
         int k1 = 0;
 
@@ -179,10 +99,14 @@ public class ExpansiveBiomeProvider extends BiomeProvider
     }
 
     @Override
-    public boolean hasStructure(Structure<?> structure) {
-        return this.hasStructureCache.computeIfAbsent(structure, (s) -> {
-            for(Biome biome : allBiomes) {
-                if (biome.hasStructure(s)) {
+    public boolean hasStructure(Structure<?> structureIn) {
+        return (Boolean)this.hasStructureCache.computeIfAbsent(structureIn, (p_205006_1_) -> {
+            Biome[] var2 = this.biomes;
+            int var3 = var2.length;
+
+            for(int var4 = 0; var4 < var3; ++var4) {
+                Biome biome = var2[var4];
+                if (biome.hasStructure(p_205006_1_)) {
                     return true;
                 }
             }
@@ -191,8 +115,18 @@ public class ExpansiveBiomeProvider extends BiomeProvider
         });
     }
 
-    public Set<BlockState> getSurfaceBlocks()
-    {
-        return null;
+    @Override
+    public Set<BlockState> getSurfaceBlocks() {
+        if (this.topBlocksCache.isEmpty()) {
+            Biome[] var1 = this.biomes;
+            int var2 = var1.length;
+
+            for(int var3 = 0; var3 < var2; ++var3) {
+                Biome biome = var1[var3];
+                this.topBlocksCache.add(biome.getSurfaceBuilderConfig().getTop());
+            }
+        }
+
+        return this.topBlocksCache;
     }
 }

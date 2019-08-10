@@ -56,6 +56,9 @@ public class ExpansiveBiomes
     public static List<Block> blockListSapling = new ArrayList<>();
     private static List<String> woodTypes = new ArrayList<>();
     public static List<Item> itemlist = new ArrayList<>();
+
+    public static List<Biome> biomeListAll = new ArrayList<>();
+
     public static List<Biome> biomeListFrozen = new ArrayList<>();
     public static List<Biome> biomeListCold = new ArrayList<>();
     public static List<Biome> biomeListNormal = new ArrayList<>();
@@ -218,6 +221,13 @@ public class ExpansiveBiomes
         ForgeRegistries.BIOMES.register(shallowOceanBiome);
         ForgeRegistries.BIOMES.register(shallowColdOceanBiome);
         ForgeRegistries.BIOMES.register(shallowFrozenOceanBiome);
+
+        biomeListAll.addAll(biomeListShallow);
+        biomeListAll.addAll(biomeListCold);
+        biomeListAll.addAll(biomeListFrozen);
+        biomeListAll.addAll(biomeListLukeWarm);
+        biomeListAll.addAll(biomeListWarm);
+        biomeListAll.addAll(biomeListNormal);
 
     }
 }
