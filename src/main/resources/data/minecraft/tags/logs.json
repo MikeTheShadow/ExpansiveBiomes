@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#expansivebiomes:ash_logs",
+    "#biomesoplenty:beech_logs",
+    "#biomesoplenty:elm_logs",
+    "#biomesoplenty:ginkgo_logs",
+    "#biomesoplenty:mahogany_logs",
+    "#biomesoplenty:maple_logs",
+    "#biomesoplenty:teak_logs"
+  ]
+}

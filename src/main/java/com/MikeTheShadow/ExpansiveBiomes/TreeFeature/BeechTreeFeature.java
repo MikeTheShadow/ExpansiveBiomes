@@ -3,16 +3,11 @@ package com.MikeTheShadow.ExpansiveBiomes.TreeFeature;
 import com.MikeTheShadow.ExpansiveBiomes.ExpansiveBiomes;
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.trees.BirchTree;
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.gen.IWorldGenerationBaseReader;
 import net.minecraft.world.gen.IWorldGenerationReader;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.BirchTreeFeature;
-import net.minecraft.world.gen.feature.DarkOakTreeFeature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 import java.util.Random;
@@ -28,6 +23,7 @@ public class BeechTreeFeature extends AbstractTreeFeature<NoFeatureConfig>
         super(p_i49895_1_, p_i49895_2_);
         setSapling((net.minecraftforge.common.IPlantable) ExpansiveBiomes.blockListSapling.get(2));
     }
+    @Override
     public boolean place(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, Random rand, BlockPos position, MutableBoundingBox p_208519_5_) {
         int i = rand.nextInt(3) + 5;
         boolean flag = true;
