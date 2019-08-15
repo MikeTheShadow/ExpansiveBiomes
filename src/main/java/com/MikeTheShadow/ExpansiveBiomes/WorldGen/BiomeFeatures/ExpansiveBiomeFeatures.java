@@ -1,5 +1,6 @@
 package com.MikeTheShadow.ExpansiveBiomes.WorldGen.BiomeFeatures;
 
+import com.MikeTheShadow.ExpansiveBiomes.WorldGen.Carvers.ExpansiveCaveCarver;
 import com.google.common.collect.Lists;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -43,7 +44,8 @@ public class ExpansiveBiomeFeatures
     }
     */
     public static void addCarvers(Biome biomeIn) {
-        //biomeIn.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(WorldCarver.CAVE, new ProbabilityConfig(0.14285715F)));
+        //biomeIn.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(ExpansiveCaveCarver.CAVE, new ProbabilityConfig(0.14285715F)));
+        biomeIn.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(ExpansiveCaveCarver.CAVE, new ProbabilityConfig(100F)));
         //biomeIn.addCarver(GenerationStage.Carving.AIR, Biome.createCarver(WorldCarver.CANYON, new ProbabilityConfig(0.02F)));
     }
 
