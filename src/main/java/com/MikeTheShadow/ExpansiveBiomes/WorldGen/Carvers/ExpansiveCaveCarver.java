@@ -22,7 +22,8 @@ public class ExpansiveCaveCarver extends WorldCarver<ProbabilityConfig>
 
     public boolean carve(IChunk p_212867_1_, Random p_212867_2_, int p_212867_3_, int p_212867_4_, int p_212867_5_, int p_212867_6_, int p_212867_7_, BitSet p_212867_8_, ProbabilityConfig p_212867_9_) {
         int lvt_10_1_ = (this.func_222704_c() * 2 - 1) * 16;
-        int lvt_11_1_ = p_212867_2_.nextInt(p_212867_2_.nextInt(p_212867_2_.nextInt(this.func_222724_a()) + 1) + 1);
+        int testModifier = 1; //default 1
+        int lvt_11_1_ = p_212867_2_.nextInt(p_212867_2_.nextInt(p_212867_2_.nextInt(this.func_222724_a()) + 1) + testModifier);
 
         for(int lvt_12_1_ = 0; lvt_12_1_ < lvt_11_1_; ++lvt_12_1_) {
             double lvt_13_1_ = (double)(p_212867_4_ * 16 + p_212867_2_.nextInt(16));
@@ -60,7 +61,7 @@ public class ExpansiveCaveCarver extends WorldCarver<ProbabilityConfig>
             lvt_2_1_ *= p_222722_1_.nextFloat() * p_222722_1_.nextFloat() * 3.0F + 1.0F;
         }
 
-        return lvt_2_1_;
+        return lvt_2_1_ + 50;
     }
 
     protected double func_222725_b() {

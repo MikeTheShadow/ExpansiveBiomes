@@ -15,8 +15,8 @@ import java.util.function.Function;
 public class ExpansiveCarver <C extends ICarverConfig> extends ForgeRegistryEntry<WorldCarver<?>>
 {
     public static final WorldCarver<ProbabilityConfig> CAVE = register("cave", new ExpansiveCaveCarver(ProbabilityConfig::deserialize, 256));
-    private static <C extends ICarverConfig, F extends WorldCarver<C>> F register(String p_222699_0_, F p_222699_1_)
+    private static <C extends ICarverConfig, F extends WorldCarver<C>> F register(String carver_name, F p_222699_1_)
     {
-        return (F) Registry.register(Registry.CARVER, p_222699_0_, p_222699_1_);
+        return (F) Registry.register(Registry.CARVER, carver_name, p_222699_1_);
     }
 }

@@ -10,7 +10,6 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.provider.BiomeProvider;
-import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.*;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.server.ServerWorld;
