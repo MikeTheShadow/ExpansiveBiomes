@@ -1,4 +1,4 @@
-package com.MikeTheShadow.ExpansiveBiomes.WorldGen.Biome;
+package com.MikeTheShadow.ExpansiveBiomes.WorldGen.Biome.CustomBiomes;
 
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;

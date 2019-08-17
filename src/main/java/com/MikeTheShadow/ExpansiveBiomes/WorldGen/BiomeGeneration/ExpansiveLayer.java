@@ -1,10 +1,9 @@
 package com.MikeTheShadow.ExpansiveBiomes.WorldGen.BiomeGeneration;
 
-import com.MikeTheShadow.ExpansiveBiomes.WorldGen.Biome.ShieldBiome;
+import com.MikeTheShadow.ExpansiveBiomes.WorldGen.Biome.CustomBiomes.ShieldBiome;
 import net.minecraft.util.SharedConstants;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.area.IAreaFactory;
 import net.minecraft.world.gen.area.LazyArea;
 import org.apache.logging.log4j.LogManager;

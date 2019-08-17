@@ -20,39 +20,40 @@ public class ExpansiveCaveCarver extends WorldCarver<ProbabilityConfig>
         return p_212868_1_.nextFloat() <= p_212868_4_.probability;
     }
 
-    public boolean carve(IChunk p_212867_1_, Random p_212867_2_, int p_212867_3_, int p_212867_4_, int p_212867_5_, int p_212867_6_, int p_212867_7_, BitSet p_212867_8_, ProbabilityConfig p_212867_9_) {
+    public boolean carve(IChunk p_212867_1_, Random randomizer, int p_212867_3_, int p_212867_4_, int p_212867_5_, int p_212867_6_, int p_212867_7_, BitSet p_212867_8_, ProbabilityConfig p_212867_9_) {
         int lvt_10_1_ = (this.func_222704_c() * 2 - 1) * 16;
         int testModifier = 1; //default 1
-        int lvt_11_1_ = p_212867_2_.nextInt(p_212867_2_.nextInt(p_212867_2_.nextInt(this.func_222724_a()) + 1) + testModifier);
+        int lvt_11_1_ = randomizer.nextInt(randomizer.nextInt(randomizer.nextInt(this.func_222724_a())) + testModifier);
 
         for(int lvt_12_1_ = 0; lvt_12_1_ < lvt_11_1_; ++lvt_12_1_) {
-            double lvt_13_1_ = (double)(p_212867_4_ * 16 + p_212867_2_.nextInt(16));
-            double lvt_15_1_ = (double)this.generateCaveStartY(p_212867_2_);
-            double lvt_17_1_ = (double)(p_212867_5_ * 16 + p_212867_2_.nextInt(16));
+            double lvt_13_1_ = (double)(p_212867_4_ * 16 + randomizer.nextInt(16));
+            double lvt_15_1_ = (double)this.generateCaveStartY(randomizer);
+            double lvt_17_1_ = (double)(p_212867_5_ * 16 + randomizer.nextInt(16));
             int lvt_19_1_ = 1;
             float lvt_22_2_;
-            if (p_212867_2_.nextInt(4) == 0) {
+            if (randomizer.nextInt(4) == 0) {
                 double lvt_20_1_ = 0.5D;
-                lvt_22_2_ = 1.0F + p_212867_2_.nextFloat() * 6.0F;
-                this.func_222723_a(p_212867_1_, p_212867_2_.nextLong(), p_212867_3_, p_212867_6_, p_212867_7_, lvt_13_1_, lvt_15_1_, lvt_17_1_, lvt_22_2_, 0.5D, p_212867_8_);
-                lvt_19_1_ += p_212867_2_.nextInt(4);
+                lvt_22_2_ = 1.0F + randomizer.nextFloat() * 6.0F;
+                this.func_222723_a(p_212867_1_, randomizer.nextLong(), p_212867_3_, p_212867_6_, p_212867_7_, lvt_13_1_, lvt_15_1_, lvt_17_1_, lvt_22_2_, 0.5D, p_212867_8_);
+                lvt_19_1_ += randomizer.nextInt(4);
             }
 
             for(int lvt_20_2_ = 0; lvt_20_2_ < lvt_19_1_; ++lvt_20_2_) {
-                float lvt_21_1_ = p_212867_2_.nextFloat() * 6.2831855F;
-                lvt_22_2_ = (p_212867_2_.nextFloat() - 0.5F) / 4.0F;
-                float lvt_23_1_ = this.generateCaveRadius(p_212867_2_);
-                int lvt_24_1_ = lvt_10_1_ - p_212867_2_.nextInt(lvt_10_1_ / 4);
+                float lvt_21_1_ = randomizer.nextFloat() * 6.2831855F;
+                lvt_22_2_ = (randomizer.nextFloat() - 0.5F) / 4.0F;
+                float lvt_23_1_ = this.generateCaveRadius(randomizer);
+                int lvt_24_1_ = lvt_10_1_ - randomizer.nextInt(lvt_10_1_ / 4);
                 boolean lvt_25_1_ = false;
-                this.carveTunnel(p_212867_1_, p_212867_2_.nextLong(), p_212867_3_, p_212867_6_, p_212867_7_, lvt_13_1_, lvt_15_1_, lvt_17_1_, lvt_23_1_, lvt_21_1_, lvt_22_2_, 0, lvt_24_1_, this.func_222725_b(), p_212867_8_);
+                this.carveTunnel(p_212867_1_, randomizer.nextLong(), p_212867_3_, p_212867_6_, p_212867_7_, lvt_13_1_, lvt_15_1_, lvt_17_1_, lvt_23_1_, lvt_21_1_, lvt_22_2_, 0, lvt_24_1_, this.func_222725_b(), p_212867_8_);
             }
         }
 
         return true;
     }
 
-    protected int func_222724_a() {
-        return 15;
+    protected int func_222724_a()
+    {
+        return 17;
     }
 
     protected float generateCaveRadius(Random p_222722_1_) {
@@ -61,7 +62,7 @@ public class ExpansiveCaveCarver extends WorldCarver<ProbabilityConfig>
             lvt_2_1_ *= p_222722_1_.nextFloat() * p_222722_1_.nextFloat() * 3.0F + 1.0F;
         }
 
-        return lvt_2_1_ + 50;
+        return lvt_2_1_;
     }
 
     protected double func_222725_b() {

@@ -1,4 +1,4 @@
-package com.MikeTheShadow.ExpansiveBiomes.WorldGen.Biome;
+package com.MikeTheShadow.ExpansiveBiomes.WorldGen.Biome.CustomBiomes;
 
 import com.MikeTheShadow.ExpansiveBiomes.WorldGen.BiomeFeatures.ExpansiveBiomeFeatures;
 import net.minecraft.block.Blocks;
