@@ -19,9 +19,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
@@ -56,15 +53,6 @@ public class ExpansiveBiomes
     public static List<Item> itemlist = new ArrayList<>();
 
     public static List<Biome> biomeListAll = new ArrayList<>();
-
-    public static List<Biome> biomeListFrozen = new ArrayList<>();
-    public static List<Biome> biomeListCold = new ArrayList<>();
-    public static List<Biome> biomeListNormal = new ArrayList<>();
-    public static List<Biome> biomeListLukeWarm = new ArrayList<>();
-    public static List<Biome> biomeListWarm = new ArrayList<>();
-    public static List<Biome> biomeListShallow = new ArrayList<>();
-    public static Feature<NoFeatureConfig> maple_tree;
-
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
     public ExpansiveBiomes()
@@ -181,51 +169,19 @@ public class ExpansiveBiomes
     @SubscribeEvent
     public static void registerBiome(final RegistryEvent.Register<Biome> event)
     {
-        Biome hardwoodBiome = HardwoodforestBiome.BIOME;
-        Biome shieldBiome = ShieldBiome.BIOME;
-        Biome shallowWarmOceanBiome = ShallowWarmOceanBiome.BIOME;
-        Biome shallowLukewarmOceanBiome = ShallowLukewarmOceanBiome.BIOME;
-        Biome shallowOceanBiome = ShallowOceanBiome.BIOME;
-        Biome shallowColdOceanBiome = ShallowColdOceanBiome.BIOME;
-        Biome shallowFrozenOceanBiome = ShallowFrozenOceanBiome.BIOME;
-        //Temperature based biome lists. Used in ExpansiveBiomeProvider.
-        biomeListFrozen.add(Biomes.SNOWY_TAIGA);
-        biomeListFrozen.add(Biomes.SNOWY_TUNDRA);
-        biomeListCold.add(shieldBiome);
-        biomeListCold.add(hardwoodBiome);
-        biomeListNormal.add(Biomes.FOREST);
-        biomeListLukeWarm.add(Biomes.SAVANNA);
-        biomeListLukeWarm.add(Biomes.JUNGLE);
-        biomeListWarm.add(Biomes.DESERT_LAKES);
-        //Shallow Ocean biome list by temp.
-        biomeListShallow.add(shallowWarmOceanBiome);
-        biomeListShallow.add(shallowLukewarmOceanBiome);
-        biomeListShallow.add(shallowOceanBiome);
-        biomeListShallow.add(shallowColdOceanBiome);
-        biomeListShallow.add(shallowFrozenOceanBiome);
-        //register name
-        hardwoodBiome.setRegistryName("hardwoodforest");
-        shieldBiome.setRegistryName("shield");
-        shallowWarmOceanBiome.setRegistryName("shallowwarmocean");
-        shallowLukewarmOceanBiome.setRegistryName("shallowlukewarmocean");
-        shallowOceanBiome.setRegistryName("shallowocean");
-        shallowColdOceanBiome.setRegistryName("shallowcoldocean");
-        shallowFrozenOceanBiome.setRegistryName("shallowfrozenocean");
-        //register biome
-        ForgeRegistries.BIOMES.register(hardwoodBiome);
-        ForgeRegistries.BIOMES.register(shieldBiome);
-        ForgeRegistries.BIOMES.register(shallowWarmOceanBiome);
-        ForgeRegistries.BIOMES.register(shallowLukewarmOceanBiome);
-        ForgeRegistries.BIOMES.register(shallowOceanBiome);
-        ForgeRegistries.BIOMES.register(shallowColdOceanBiome);
-        ForgeRegistries.BIOMES.register(shallowFrozenOceanBiome);
-
-        biomeListAll.addAll(biomeListShallow);
-        biomeListAll.addAll(biomeListCold);
-        biomeListAll.addAll(biomeListFrozen);
-        biomeListAll.addAll(biomeListLukeWarm);
-        biomeListAll.addAll(biomeListWarm);
-        biomeListAll.addAll(biomeListNormal);
-
+        ExpansiveBiomeRegister("hardwoodforest",HardwoodforestBiome.BIOME);
+        ExpansiveBiomeRegister("shield",ShieldBiome.BIOME);
+        ExpansiveBiomeRegister("shallowwarmocean",ShallowWarmOceanBiome.BIOME);
+        ExpansiveBiomeRegister("shallowlukewarmocean",ShallowLukewarmOceanBiome.BIOME);
+        ExpansiveBiomeRegister("shallowocean",ShallowOceanBiome.BIOME);
+        ExpansiveBiomeRegister("shallowcoldocean",ShallowColdOceanBiome.BIOME);
+        ExpansiveBiomeRegister("shallowfrozenocean",ShallowFrozenOceanBiome.BIOME);
     }
+    public static void ExpansiveBiomeRegister(String Name, Biome biome)
+    {
+        biome.setRegistryName(Name);
+        ForgeRegistries.BIOMES.register(biome);
+        biomeListAll.add(biome);
+    }
+
 }
