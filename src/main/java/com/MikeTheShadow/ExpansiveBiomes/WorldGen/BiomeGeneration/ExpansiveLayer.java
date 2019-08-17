@@ -1,5 +1,6 @@
 package com.MikeTheShadow.ExpansiveBiomes.WorldGen.BiomeGeneration;
 
+import com.MikeTheShadow.ExpansiveBiomes.ExpansiveBiomes;
 import com.MikeTheShadow.ExpansiveBiomes.WorldGen.Biome.CustomBiomes.ShieldBiome;
 import net.minecraft.util.SharedConstants;
 import net.minecraft.util.registry.Registry;
@@ -33,25 +34,32 @@ public class ExpansiveLayer
         return abiome;
     }
 
-    private Biome getBiomeFromInteger(int p_215739_1_)
+    private Biome getBiomeFromInteger(int biomeNum)
     {
-        Biome biome = Registry.BIOME.getByValue(p_215739_1_);
+
+        LOGGER.info("EXPANSIVEBIOMESDEBUG custom int: " + biomeNum);
+        /*
+        Biome biome = Registry.BIOME.getByValue(biomeNum);
         if (biome == null)
         {
             if (SharedConstants.developmentMode)
             {
-                throw new IllegalStateException("Unknown biome id: " + p_215739_1_);
+                throw new IllegalStateException("Unknown biome id: " + biomeNum);
             }
             else
                 {
-                LOGGER.warn("Unknown biome id: ", (int)p_215739_1_);
+                LOGGER.warn("Unknown biome id: ", (int)biomeNum);
                 return ShieldBiome.BIOME;
             }
+        }
+        */
+        if(biomeNum < ExpansiveBiomes.biomeListAll.size())
+        {
+            return ExpansiveBiomes.biomeListAll.get(biomeNum);
         }
         else
         {
             return ShieldBiome.BIOME;
-           //return biome;
         }
     }
 
