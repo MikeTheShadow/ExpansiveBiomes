@@ -36,23 +36,6 @@ public class ExpansiveLayer
 
     private Biome getBiomeFromInteger(int biomeNum)
     {
-
-        LOGGER.info("EXPANSIVEBIOMESDEBUG custom int: " + biomeNum);
-        /*
-        Biome biome = Registry.BIOME.getByValue(biomeNum);
-        if (biome == null)
-        {
-            if (SharedConstants.developmentMode)
-            {
-                throw new IllegalStateException("Unknown biome id: " + biomeNum);
-            }
-            else
-                {
-                LOGGER.warn("Unknown biome id: ", (int)biomeNum);
-                return ShieldBiome.BIOME;
-            }
-        }
-        */
         if(biomeNum < ExpansiveBiomes.biomeListAll.size())
         {
             return ExpansiveBiomes.biomeListAll.get(biomeNum);
