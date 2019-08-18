@@ -2,8 +2,6 @@ package com.MikeTheShadow.ExpansiveBiomes.WorldGen.BiomeGeneration;
 
 import com.MikeTheShadow.ExpansiveBiomes.ExpansiveBiomes;
 import com.MikeTheShadow.ExpansiveBiomes.WorldGen.Biome.CustomBiomes.ShieldBiome;
-import net.minecraft.util.SharedConstants;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.area.IAreaFactory;
 import net.minecraft.world.gen.area.LazyArea;
@@ -19,9 +17,9 @@ public class ExpansiveLayer
         this.lazyArea = lazyAreaFactoryIn.make();
     }
 
-    public Biome[] generateBiomes(int startX, int startZ, int xSize, int zSize) {
+    public Biome[] generateBiomes(int startX, int startZ, int xSize, int zSize)
+    {
         Biome[] abiome = new Biome[xSize * zSize];
-
         for(int i = 0; i < zSize; ++i)
         {
             for(int j = 0; j < xSize; ++j)
@@ -46,7 +44,8 @@ public class ExpansiveLayer
         }
     }
 
-    public Biome func_215738_a(int p_215738_1_, int p_215738_2_) {
+    public Biome func_215738_a(int p_215738_1_, int p_215738_2_)
+    {
         return this.getBiomeFromInteger(this.lazyArea.getValue(p_215738_1_, p_215738_2_));
     }
 }

@@ -8,6 +8,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.StateContainer;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -28,12 +29,14 @@ public class CustomLeavesBlock extends LeavesBlock implements net.minecraftforge
         super(properties);
     }
 
-    public static int getDistance(BlockState neighbor)
+    private static int getDistance(BlockState neighbor)
     {
-
-        if (trunk.contains(neighbor.getBlock())) {
+        if (BlockTags.LOGS.contains(neighbor.getBlock()))
+        {
             return 0;
-        } else {
+        }
+        else
+            {
             return neighbor.getBlock() instanceof LeavesBlock ? neighbor.get(DISTANCE) : 7;
         }
     }

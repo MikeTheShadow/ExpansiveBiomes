@@ -11,15 +11,18 @@ import com.MikeTheShadow.ExpansiveBiomes.WorldGen.Biome.CustomBiomes.*;
 import com.MikeTheShadow.ExpansiveBiomes.WorldGen.ExpansiveWorldType;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -36,8 +39,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+
+//TODO add vanilla biomes to our version!
 
 @Mod.EventBusSubscriber(modid = ExpansiveBiomes.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 @Mod(ExpansiveBiomes.MODID)
@@ -169,6 +176,8 @@ public class ExpansiveBiomes
     @SubscribeEvent
     public static void registerBiome(final RegistryEvent.Register<Biome> event)
     {
+        LOGGER.info("Testing123: " + blockListLog.get(0).getTags().size());
+        LOGGER.info("ID: " + blockListLog.get(0).getRegistryName());
         ExpansiveBiomeRegister("hardwoodforest",HardwoodforestBiome.BIOME);
         ExpansiveBiomeRegister("shield",ShieldBiome.BIOME);
         ExpansiveBiomeRegister("shallowwarmocean",ShallowWarmOceanBiome.BIOME);

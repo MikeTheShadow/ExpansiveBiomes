@@ -1,5 +1,6 @@
 package com.MikeTheShadow.ExpansiveBiomes.WorldGen.BiomeFeatures;
 
+import com.MikeTheShadow.ExpansiveBiomes.Utils.ExpansiveFeature;
 import com.MikeTheShadow.ExpansiveBiomes.WorldGen.Carvers.ExpansiveCaveCarver;
 import com.google.common.collect.Lists;
 import net.minecraft.block.BlockState;
@@ -129,6 +130,14 @@ public class ExpansiveBiomeFeatures
 
     public static void func_222296_u(Biome biomeIn) {
         biomeIn.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Biome.createDecoratedFeature(Feature.RANDOM_SELECTOR, new MultipleRandomFeatureConfig(new Feature[]{Feature.FANCY_TREE}, new IFeatureConfig[]{IFeatureConfig.NO_FEATURE_CONFIG}, new float[]{0.1F}, Feature.NORMAL_TREE, IFeatureConfig.NO_FEATURE_CONFIG), Placement.COUNT_EXTRA_HEIGHTMAP, new AtSurfaceWithExtraConfig(0, 0.1F, 1)));
+    }
+
+
+
+
+    //ADD CUSTOM TREE FEATURES HERE
+    public static void addMapleTrees(Biome biomeIn) {
+        biomeIn.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Biome.createDecoratedFeature(ExpansiveFeature.MAPLE_TREE, IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_EXTRA_HEIGHTMAP, new AtSurfaceWithExtraConfig(10, 0.1F, 1)));
     }
 
     public static void addBirchTrees(Biome biomeIn) {

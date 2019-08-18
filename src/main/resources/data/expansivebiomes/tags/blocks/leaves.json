@@ -1,11 +1,6 @@
 {
   "replace": false,
   "values": [
-    "expansivebiomes:maple_leaves",
-    "minecraft:oak_leaves",
-    "minecraft:spruce_leaves",
-    "minecraft:dark_oak_leaves",
-    "minecraft:acacia_leaves",
-    "minecraft:birch_leaves"
+    "expansivebiomes:maple_leaves"
   ]
 }

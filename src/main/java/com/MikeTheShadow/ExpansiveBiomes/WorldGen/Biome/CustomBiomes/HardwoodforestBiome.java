@@ -28,7 +28,7 @@ public class HardwoodforestBiome extends Biome
         ExpansiveBiomeFeatures.addStoneVariants(this);
         ExpansiveBiomeFeatures.addOres(this);
         ExpansiveBiomeFeatures.addSedimentDisks(this);
-        ExpansiveBiomeFeatures.addBirchTrees(this);
+        ExpansiveBiomeFeatures.addMapleTrees(this);
         ExpansiveBiomeFeatures.addDefaultFlowers(this);
         ExpansiveBiomeFeatures.addGrass(this);
         ExpansiveBiomeFeatures.addMushrooms(this);
