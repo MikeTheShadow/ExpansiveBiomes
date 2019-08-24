@@ -26,6 +26,7 @@ public class ExpansiveLayer
             {
                 int k = this.lazyArea.getValue(startX + j, startZ + i);
                 Biome biome = this.getBiomeFromInteger(k);
+                //LOGGER.info("Value of Biome: " + k);
                 abiome[j + i * xSize] = biome;
             }
         }
@@ -34,9 +35,9 @@ public class ExpansiveLayer
 
     private Biome getBiomeFromInteger(int biomeNum)
     {
-        if(biomeNum < ExpansiveBiomes.biomeListAll.size())
+        if(biomeNum < ExpansiveBiomes.biomeListAll.length - 1)
         {
-            return ExpansiveBiomes.biomeListAll.get(biomeNum);
+            return ExpansiveBiomes.biomeListAll[biomeNum];
         }
         else
         {

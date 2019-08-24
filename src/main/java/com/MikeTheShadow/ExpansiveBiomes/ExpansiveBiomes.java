@@ -11,18 +11,16 @@ import com.MikeTheShadow.ExpansiveBiomes.WorldGen.Biome.CustomBiomes.*;
 import com.MikeTheShadow.ExpansiveBiomes.WorldGen.ExpansiveWorldType;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -37,10 +35,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,7 +54,7 @@ public class ExpansiveBiomes
     private static List<String> woodTypes = new ArrayList<>();
     public static List<Item> itemlist = new ArrayList<>();
 
-    public static List<Biome> biomeListAll = new ArrayList<>();
+    public static Biome[] biomeListAll = new Biome[170];
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
     public ExpansiveBiomes()
@@ -178,19 +173,23 @@ public class ExpansiveBiomes
     {
         LOGGER.info("Testing123: " + blockListLog.get(0).getTags().size());
         LOGGER.info("ID: " + blockListLog.get(0).getRegistryName());
-        ExpansiveBiomeRegister("hardwoodforest",HardwoodforestBiome.BIOME);
-        ExpansiveBiomeRegister("shield",ShieldBiome.BIOME);
-        ExpansiveBiomeRegister("shallowwarmocean",ShallowWarmOceanBiome.BIOME);
-        ExpansiveBiomeRegister("shallowlukewarmocean",ShallowLukewarmOceanBiome.BIOME);
-        ExpansiveBiomeRegister("shallowocean",ShallowOceanBiome.BIOME);
-        ExpansiveBiomeRegister("shallowcoldocean",ShallowColdOceanBiome.BIOME);
-        ExpansiveBiomeRegister("shallowfrozenocean",ShallowFrozenOceanBiome.BIOME);
+        for(int i = 0; i < biomeListAll.length;i++)
+        {
+            biomeListAll[i] = ShieldBiome.BIOME;
+        }
+        ExpansiveBiomeRegister("hardwoodforest",HardwoodforestBiome.BIOME,51);
+        ExpansiveBiomeRegister("shield",ShieldBiome.BIOME,52);
+        ExpansiveBiomeRegister("shallowwarmocean",ShallowWarmOceanBiome.BIOME,53);
+        ExpansiveBiomeRegister("shallowlukewarmocean",ShallowLukewarmOceanBiome.BIOME,54);
+        ExpansiveBiomeRegister("shallowocean",ShallowOceanBiome.BIOME,55);
+        ExpansiveBiomeRegister("shallowcoldocean",ShallowColdOceanBiome.BIOME,56);
+        ExpansiveBiomeRegister("shallowfrozenocean",ShallowFrozenOceanBiome.BIOME,57);
     }
-    public static void ExpansiveBiomeRegister(String Name, Biome biome)
+    public static void ExpansiveBiomeRegister(String Name, Biome biome,int id)
     {
         biome.setRegistryName(Name);
         ForgeRegistries.BIOMES.register(biome);
-        biomeListAll.add(biome);
+        biomeListAll[id] = biome;
     }
 
 }
