@@ -9,7 +9,7 @@ import com.MikeTheShadow.ExpansiveBiomes.Tree.MapleTree;
 import com.MikeTheShadow.ExpansiveBiomes.Utils.ExpansiveItemGroup;
 import com.MikeTheShadow.ExpansiveBiomes.WorldGen.Biome.CustomBiomes.*;
 import com.MikeTheShadow.ExpansiveBiomes.WorldGen.Biome.DefaultBiomes.*;
-import com.MikeTheShadow.ExpansiveBiomes.WorldGen.ExpansiveWorldType;
+import com.MikeTheShadow.ExpansiveBiomes.WorldGen.BiomeGeneration.ExpansiveWorldType;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
@@ -20,7 +20,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
@@ -178,6 +177,7 @@ public class ExpansiveBiomes
         {
             biomeListAll[i] = ShieldBiome.BIOME;
         }
+        //Custom biome registries
         ExpansiveBiomeRegister("hardwoodforest",HardwoodforestBiome.BIOME,51);
         ExpansiveBiomeRegister("shield",ShieldBiome.BIOME,52);
         ExpansiveBiomeRegister("shallowwarmocean",ShallowWarmOceanBiome.BIOME,53);
@@ -186,7 +186,37 @@ public class ExpansiveBiomes
         ExpansiveBiomeRegister("shallowcoldocean",ShallowColdOceanBiome.BIOME,56);
         ExpansiveBiomeRegister("shallowfrozenocean",ShallowFrozenOceanBiome.BIOME,57);
 
-
+        //Default minecraft biomes rewritten to fit our needs
+        ExpansiveBiomeRegister("ocean", new ExpansiveOceanBiome(),0);
+        ExpansiveBiomeRegister("plains", new ExpansivePlainsBiome(),1);
+        ExpansiveBiomeRegister("desert", new ExpansiveDesertBiome(),2);
+        ExpansiveBiomeRegister("mountains", new ExpansiveMountainsBiome(),3);
+        ExpansiveBiomeRegister("forest", new ExpansiveForestBiome(),4);
+        ExpansiveBiomeRegister("taiga", new ExpansiveForestBiome(),5);
+        ExpansiveBiomeRegister("swamp", new ExpansiveSwampBiome(),6);
+        ExpansiveBiomeRegister("river", new ExpansiveRiverBiome(), 7);
+        ExpansiveBiomeRegister("nether", new ExpansiveNetherBiome(), 8);
+        ExpansiveBiomeRegister("the_end", new ExpansiveEndBiome(),9);
+        ExpansiveBiomeRegister("frozen_ocean", new ExpansiveFrozenOceanBiome(),10);
+        ExpansiveBiomeRegister("frozen_river", new ExpansiveFrozenRiverBiome(), 11);
+        ExpansiveBiomeRegister("snowy_tundra",new ExpansiveSnowyTundraBiome(),12);
+        ExpansiveBiomeRegister("snowy_mountains",new ExpansiveSnowyMountainsBiome(),13);
+        ExpansiveBiomeRegister("mushroom_fields",new ExpansiveMushroomFieldsBiome(),14);
+        ExpansiveBiomeRegister("mushroom_fields_shore",new ExpansiveMushroomFieldsShore(),15);
+        ExpansiveBiomeRegister("beach",new ExpansiveBeachBiome(),16);
+        ExpansiveBiomeRegister("desert_hills",new ExpansiveDesertHillsBiome(),17);
+        ExpansiveBiomeRegister("wooded_hills",new ExpansiveWoodedHillsBiome(),18);
+        ExpansiveBiomeRegister("taiga_hills",new ExpansiveTaigaHillsBiome(), 19);
+        ExpansiveBiomeRegister("mountain_edge",new ExpansiveMountainEdgeBiome(),20);
+        ExpansiveBiomeRegister("jungle",new ExpansiveJungleBiome(),21);
+        ExpansiveBiomeRegister("jungle_hills",new ExpansiveJungleHillsBiome(),22);
+        ExpansiveBiomeRegister("jungle_edge",new ExpansiveJungleEdgeBiome(),23);
+        ExpansiveBiomeRegister("deep_ocean",new ExpansiveDeepOceanBiome(),24);
+        ExpansiveBiomeRegister("stone_shore", new ExpansiveStoneShoreBiome(), 25);
+        ExpansiveBiomeRegister("snowy_beach",new ExpansiveSnowyBeachBiome(), 26);
+        ExpansiveBiomeRegister("birch_forest",new ExpansiveBirchForestBiome(), 27);
+        ExpansiveBiomeRegister("birch_forest_hills",new ExpansiveBirchForestHillsBiome(),28);
+        ExpansiveBiomeRegister("dark_forest",new ExpansiveDarkForestBiome(),29);
         ExpansiveBiomeRegister("snowy_taiga",new ExpansiveSnowyTaigaBiome(),30);
         ExpansiveBiomeRegister("snowy_taiga_hills",new ExpansiveSnowyTaigaHillsBiome(),31);
         ExpansiveBiomeRegister("giant_tree_taiga",new ExpansiveGiantTreeTaigaBiome(),32);
@@ -232,40 +262,6 @@ public class ExpansiveBiomes
         ExpansiveBiomeRegister("modified_badlands_plateau",new ExpansiveModifiedBadlandsPlateauBiome(),167);
         ExpansiveBiomeRegister("bamboo_jungle",new ExpansiveBambooJungleHillsBiome(),168);
         ExpansiveBiomeRegister("bamboo_jungle_hills",new ExpansiveBambooJungleHillsBiome(),169);
-
-        ExpansiveBiomeRegister("ocean", new ExpansiveOceanBiome(),0);
-        ExpansiveBiomeRegister("plains", new ExpansivePlainsBiome(),1);
-        ExpansiveBiomeRegister("desert", new ExpansiveDesertBiome(),2);
-        ExpansiveBiomeRegister("mountains", new ExpansiveMountainsBiome(),3);
-        ExpansiveBiomeRegister("forest", new ExpansiveForestBiome(),4);
-        ExpansiveBiomeRegister("taiga", new ExpansiveForestBiome(),5);
-        ExpansiveBiomeRegister("swamp", new ExpansiveSwampBiome(),6);
-        ExpansiveBiomeRegister("river", new ExpansiveRiverBiome(), 7);
-        ExpansiveBiomeRegister("nether", new ExpansiveNetherBiome(), 8);
-        ExpansiveBiomeRegister("the_end", new ExpansiveEndBiome(),9);
-        ExpansiveBiomeRegister("frozen_ocean", new ExpansiveFrozenOceanBiome(),10);
-        ExpansiveBiomeRegister("frozen_river", new ExpansiveFrozenRiverBiome(), 11);
-        ExpansiveBiomeRegister("snowy_tundra",new ExpansiveSnowyTundraBiome(),12);
-        ExpansiveBiomeRegister("snowy_mountains",new ExpansiveSnowyMountainsBiome(),13);
-        ExpansiveBiomeRegister("mushroom_fields",new ExpansiveMushroomFieldsBiome(),14);
-        ExpansiveBiomeRegister("mushroom_fields_shore",new ExpansiveMushroomFieldsShore(),15);
-        ExpansiveBiomeRegister("beach",new ExpansiveBeachBiome(),16);
-        ExpansiveBiomeRegister("desert_hills",new ExpansiveDesertHillsBiome(),17);
-        ExpansiveBiomeRegister("wooded_hills",new ExpansiveWoodedHillsBiome(),18);
-        ExpansiveBiomeRegister("taiga_hills",new ExpansiveTaigaHillsBiome(), 19);
-        ExpansiveBiomeRegister("mountain_edge",new ExpansiveMountainEdgeBiome(),20);
-        ExpansiveBiomeRegister("jungle",new ExpansiveJungleBiome(),21);
-        ExpansiveBiomeRegister("jungle_hills",new ExpansiveJungleHillsBiome(),22);
-        ExpansiveBiomeRegister("jungle_edge",new ExpansiveJungleEdgeBiome(),23);
-        ExpansiveBiomeRegister("deep_ocean",new ExpansiveDeepOceanBiome(),24);
-        ExpansiveBiomeRegister("stone_shore", new ExpansiveStoneShoreBiome(), 25);
-        ExpansiveBiomeRegister("snowy_beach",new ExpansiveSnowyBeachBiome(), 26);
-        ExpansiveBiomeRegister("birch_forest",new ExpansiveBirchForestBiome(), 27);
-        ExpansiveBiomeRegister("birch_forest_hills",new ExpansiveBirchForestHillsBiome(),28);
-        ExpansiveBiomeRegister("dark_forest",new ExpansiveDarkForestBiome(),29);
-
-
-
     }
     public static void ExpansiveBiomeRegister(String Name, Biome biome,int id)
     {
